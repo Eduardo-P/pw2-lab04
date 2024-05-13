@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<note>
+  <status>200</status>
+  <statusText>OK</statusText>
+  <response>This is the response text from the XML file.</response>
+</note>
