@@ -42,3 +42,34 @@ function drawChart() {
     xmlhttp.send();
 }
 
+function drawGoogleChart(dataset, dates) {
+    var chartsContainer = document.getElementById("graphics");
+    chartsContainer.innerHTML = "";
+
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Date');
+    dataset.forEach(datasetItem => {
+        data.addColumn('number', datasetItem.label);
+    });
+
+    var rows = [];
+    dates.forEach(date => {
+        var row = [date];
+        dataset.forEach(datasetItem => {
+            var value = datasetItem.data[dates.indexOf(date)] || 0;
+            row.push(value);
+        });
+        rows.push(row);
+    });
+    data.addRows(rows);
+
+    var options = {
+        title: 'CONFIRMED',
+        curveType: 'function',
+        legend: { position: 'bottom' }
+    };
+
+    var chart = new google.visualization.LineChart(chartsContainer);
+    chart.draw(data, options);
+}
+
